@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DATA TABLE</title>
+	<link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+
+	<div class="container">
+        <h1 >Create Account</h1>
+		<label for="username">User Name</label>
+		<input type="text" name="username" id="username">
+		<label for="email">Email</label>
+		<input type="text" name="email" id="email">
+		<label for="mobile">Mobile No</label>
+		<input type="tel" name="mobile" id="mobile">
+		<label for="state">State</label>
+
+                                <select name="state" id="state">
+                                <option value="" selected>--Select--</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Telangana">Telangana</option>
+                                <option value="Odisha">Odisha</option>
+                                </select>
+
+        
+		<input type="button" name="button" id="btn" value="Add" onclick="save()">
+		
+
+	</div>
+
+		<table id="show">
+			
+				<tr>
+					<th>User Name</th>
+					<th>Email</th>
+					<th>Mobile</th>
+					<th>State</th>
+                    <th></th>
+				</tr>
+                <tbody id="tbody">
+    
+         
+                </tbody>
+			
+		</table>
+</body>
+</html>
