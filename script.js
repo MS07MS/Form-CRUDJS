@@ -1,97 +1,97 @@
-
-function save(){
-    let username,email,mobile,state;
-    username = document.getElementById('username');
-    email = document.getElementById('email');
-    mobile = document.getElementById('mobile');
-    state = document.getElementById('state');
-
-    let record = new Array();
-    record = JSON.parse( localStorage.getItem("user"))?JSON.parse( localStorage.getItem("user")):[]
-    record.push({
-        "id":record.length,
-        "username":username.value,
-        "email"   :email.value,
-        "mobile"  :mobile.value,
-        "state"  :state.value
-    });
-
-
-    localStorage.setItem("user",JSON.stringify(record));
-
-    tableData(record);
-   
+function load() {
+  var locData = JSON.parse(localStorage.getItem("user"));
+  tableData(locData);
 }
-function deleteData(id){
-    var locData = JSON.parse( localStorage.getItem("user"));
-    var updatedData = locData.filter(data => data.id !=id);
-    localStorage.setItem("user",JSON.stringify(updatedData));
-    tableData(updatedData);
-    
+function save() {
+  let username, email, mobile, state, button1;
+  username = document.getElementById("username");
+  email = document.getElementById("email");
+  mobile = document.getElementById("mobile");
+  state = document.getElementById("state");
+  button1 = document.getElementById("button");
+  let record = new Array();
+  record = JSON.parse(localStorage.getItem("user"))
+    ? JSON.parse(localStorage.getItem("user"))
+    : [];
+  record.push({
+    id: Math.random(),
+    username: username.value,
+    email: email.value,
+    mobile: mobile.value,
+    state: state.value,
+  });
+
+  localStorage.setItem("user", JSON.stringify(record));
+
+  tableData(record);
 }
-function Update(id){
-    
-    var locData = JSON.parse( localStorage.getItem("user"));
-    var updated = locData.filter(data => data.id !=id);
-    
-    document.getElementById('username').value = updated[id];
-    document.getElementById('email').value = updated[id].email;
-    document.getElementById('mobile').value = updated[id];
-    document.getElementById('state').value = updated[id].state;
-    localStorage.setItem("user",JSON.stringify(updated));
-    tableData(updated);
-    
+function deleteData(id) {
+  var locData = JSON.parse(localStorage.getItem("user"));
+  var updatedData = locData.filter((data) => data.id != id);
+  localStorage.setItem("user", JSON.stringify(updatedData));
+  tableData(updatedData);
 }
 
-function tableData(datas)
-{
-    let tabledata = "";
-    datas.map(data=>
-        {
-          tabledata+=`<tr>
+function editChanges(id) {
+  var locData = JSON.parse(localStorage.getItem("user"));
+  var save = locData.find((data) => data.id == id);
+  document.getElementById("username").value = save.username;
+  document.getElementById("id").value = save.id;
+  document.getElementById("email").value = save.email;
+  document.getElementById("mobile").value = save.mobile;
+  document.getElementById("state").value = save.state;
+  const button1 = document.getElementById("btn");
+  const button2 = document.getElementById("updatebtn");
+  button1.style.visibility = "hidden";
+  button2.style.visibility = "visible";
+}
+function update() {
+  var locData = JSON.parse(localStorage.getItem("user"));
+  var u = document.getElementById("username").value;
+  var e = document.getElementById("email").value;
+  var m = document.getElementById("mobile").value;
+  var s = document.getElementById("state").value;
+  var i = document.getElementById("id").value;
+
+  console.log(s);
+
+  locData.forEach((elem) => {
+    if (elem.id == i) {
+      elem.username = u;
+      elem.email = e;
+      elem.mobile = m;
+      elem.state = s;
+    }
+  });
+
+  console.log(locData);
+
+  localStorage.setItem("user", JSON.stringify(locData));
+}
+
+function tableData(datas) {
+  var tableid = document.getElementById("tbody");
+  var tableid2 = document.getElementById("test");
+
+  // tableid.empty();
+  var locData = JSON.parse(localStorage.getItem("user"));
+
+  if (locData.length > 0) {
+    tableid2.style.display = "block";
+  }
+
+  let tabledata = "";
+  datas.map((data) => {
+    tabledata += `<tr>
           <td>${data.username}</td>
           <td>${data.email}</td>
           <td>${data.mobile}</td>
           <td>${data.state}</td>
           <td><input type="button" name="button" id="btn" value="Delete" onclick="deleteData(${data.id})"></td>
-          <td><input type="button" name="editbutton" id="edit" value="Edit" onclick="Update(${data.id})"></td>
-          </tr>`
-        }
-        )
+          <td><input type="button" name="edit" id="edit" value="Edit" onclick="editChanges(${data.id})"></td>
+          </tr>`;
+  });
 
-        document.getElementById("tbody").innerHTML=tabledata;
-
+  tableid.innerHTML = tabledata;
 }
 
-
-    // var list1 = [];
-	// 	var list2 = [];
-	// 	var list3 = [];
-	// 	var list4 = [];
-
-	// 	var n = 1;
-	// 	var x = 0;
-
-	// 	function AddRow(){
-
-	// 		var AddRown = document.getElementById('show');
-	// 		var NewRow = AddRown.insertRow(n);
-
-	// 		list1[x] = document.getElementById("username").value;
-	// 		list2[x] = document.getElementById("email").value;
-	// 		list3[x] = document.getElementById("mobile").value;
-	// 		list4[x] = document.getElementById("state").value;
-
-	// 		var cel1 = NewRow.insertCell(0);
-	// 		var cel2 = NewRow.insertCell(1);
-	// 		var cel3 = NewRow.insertCell(2);
-	// 		var cel4 = NewRow.insertCell(3);
-
-	// 		cel1.innerHTML = list1[x];
-	// 		cel2.innerHTML = list2[x];
-	// 		cel3.innerHTML = list3[x];
-	// 		cel4.innerHTML = list4[x];
-
-	// 		n++;
-	// 		x++;
-	// 	}

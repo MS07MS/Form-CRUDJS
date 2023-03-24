@@ -5,12 +5,13 @@
 	<link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
-<body>
+<body onload="load()">
 
 	<div class="container">
         <h1 >Create Account</h1>
 		<label for="username">User Name</label>
 		<input type="text" name="username" id="username">
+		<input type="text" id="id" hidden>
 		<label for="email">Email</label>
 		<input type="text" name="email" id="email">
 		<label for="mobile">Mobile No</label>
@@ -29,10 +30,12 @@
 
         
 		<input type="button" name="button" id="btn" value="Add" onclick="save()">
+		<input type="button" name="button" id="updatebtn" value="Update" onclick="update()" style="visibility: hidden;">
 		
 
-	</div>
+	</div >
 
+	<div id="test"  style="display: none;">
 		<table id="show">
 			
 				<tr>
@@ -48,5 +51,6 @@
                 </tbody>
 			
 		</table>
+	</div>
 </body>
 </html>
