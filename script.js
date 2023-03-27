@@ -4,21 +4,21 @@ function load() {
 }
 function save() {
   let username, email, mobile, state, button1;
-  username = document.getElementById("username");
-  email = document.getElementById("email");
-  mobile = document.getElementById("mobile");
-  state = document.getElementById("state");
-  button1 = document.getElementById("button");
+  username = $("#username");
+  email = $("#email");
+  mobile = $("#mobile");
+  state = $("#state");
+  button1 = $("#button");
   let record = new Array();
   record = JSON.parse(localStorage.getItem("user"))
     ? JSON.parse(localStorage.getItem("user"))
     : [];
   record.push({
     id: Math.random(),
-    username: username.value,
-    email: email.value,
-    mobile: mobile.value,
-    state: state.value,
+    username: username.val(),
+    email: email.val(),
+    mobile: mobile.val(),
+    state: state.val(),
   });
 
   localStorage.setItem("user", JSON.stringify(record));
@@ -35,23 +35,23 @@ function deleteData(id) {
 function editChanges(id) {
   var locData = JSON.parse(localStorage.getItem("user"));
   var save = locData.find((data) => data.id == id);
-  document.getElementById("username").value = save.username;
-  document.getElementById("id").value = save.id;
-  document.getElementById("email").value = save.email;
-  document.getElementById("mobile").value = save.mobile;
-  document.getElementById("state").value = save.state;
-  const button1 = document.getElementById("btn");
-  const button2 = document.getElementById("updatebtn");
-  button1.style.visibility = "hidden";
-  button2.style.visibility = "visible";
+  $("#username").val(save.username)  ;
+  $("#id").val (save.id);
+  $("#email").val(save.email);
+  $("#mobile").val(save.mobile);
+  $("#state").val(save.state);
+  const button1 = $("#btn");
+  const button2 = $("#updatebtn");
+  button1.hide();
+  button2.show();
 }
 function update() {
   var locData = JSON.parse(localStorage.getItem("user"));
-  var u = document.getElementById("username").value;
-  var e = document.getElementById("email").value;
-  var m = document.getElementById("mobile").value;
-  var s = document.getElementById("state").value;
-  var i = document.getElementById("id").value;
+  var u = $("#username").val();
+  var e = $("#email").val();
+  var m = $("#mobile").val();
+  var s = $("#state").val();
+  var i = $("#id").val();
 
   console.log(s);
 
@@ -67,17 +67,21 @@ function update() {
   console.log(locData);
 
   localStorage.setItem("user", JSON.stringify(locData));
+
+  var locData1 = JSON.parse(localStorage.getItem("user"));
+
+  tableData(locData1);
 }
 
 function tableData(datas) {
-  var tableid = document.getElementById("tbody");
-  var tableid2 = document.getElementById("test");
+  var tableid = $("#tbody");
+  var tableid2 = $("#test");
 
   // tableid.empty();
   var locData = JSON.parse(localStorage.getItem("user"));
 
   if (locData.length > 0) {
-    tableid2.style.display = "block";
+    tableid2.show();
   }
 
   let tabledata = "";
@@ -92,6 +96,6 @@ function tableData(datas) {
           </tr>`;
   });
 
-  tableid.innerHTML = tabledata;
+  tableid.html(tabledata);
 }
 
